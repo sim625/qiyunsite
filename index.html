@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>栖云服务器 | 红石生电 · 休闲生存</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- 导航栏 -->
+  <nav class="navbar">
+    <div class="nav-logo">栖云服务器</div>
+    <ul class="nav-links">
+      <li><a href="#home">首页</a></li>
+      <li><a href="#servers">分区</a></li>
+      <li><a href="#thanks">鸣谢</a></li>
+      <li><a href="#faq">常见问题 FAQ</a></li>
+	  <li><a href="blog.html">公告 & 博客</a></li>
+    </ul>
+  </nav>
+
+  <!-- 首屏 -->
+  <section id="home" class="hero">
+    <h1>栖云服务器</h1>
+    <p class="slogan">红石生电 · 休闲生存 · 原版客户端即可加入</p>
+    <div class="hero-info">
+      <span>已持续运营 <strong id="days">0</strong> 天</span>
+      <span class="group-hover">
+        官方 QQ 群：<strong>675736013</strong>
+        <img src="qrcode.png" alt="群二维码" class="qrcode-popup">
+      </span>
+    </div>
+    <a href="#servers" class="btn">查看服务器地址</a>
+  </section>
+
+  <!-- 数据卡片 -->
+  <section class="stats">
+    <div class="stat-card">
+      <div class="stat-num" id="stat-days">0</div>
+      <div class="stat-label">持续运营（天）</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num">1.21.11</div>
+      <div class="stat-label">服务器版本</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num">1.10~26.3</div>
+      <div class="stat-label">支持版本</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num">28</div>
+      <div class="stat-label">群人数</div>
+    </div>
+  </section>
+
+  <!-- 分区介绍 -->
+  <section id="servers" class="section">
+    <h2>加入栖云服务器</h2>
+    <div class="server-grid">
+      <div class="server-card">
+        <h3>主服</h3>
+        <p>Paper 1.21.11，红石生电、商店经济、领地保护、点歌系统。</p>
+        <p class="server-ip">qiyunmcs.duckdns.org:25565</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 鸣谢 -->
+  <section id="thanks" class="section">
+    <h2>感谢名单</h2>
+    <p class="thanks-intro">栖云能走到今天，离不开每一位玩家的陪伴与付出。</p>
+    <table class="thanks-table">
+      <thead>
+        <tr><th>玩家</th><th>贡献</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>chara</td><td>商店建设、材料收集</td></tr>
+        <tr><td>hajimi</td><td>刷铁机、红石机器</td></tr>
+        <tr><td>B2XC</td><td>甘蔗机、红石机器</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faq" class="section">
+    <h2>常见问题</h2>
+    <div class="faq-item">
+      <button class="faq-question">怎么进入服务器？</button>
+      <div class="faq-answer">Java 版客户端在多人游戏里添加服务器地址 <code>qiyunmcs.duckdns.org:25565</code> 即可。</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-question">服务器支持哪些版本？</button>
+      <div class="faq-answer">主服支持 1.21.11，同时通过 ViaVersion 兼容 1.10 到 26.3 的客户端。</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-question">服务器收费吗？</button>
+      <div class="faq-answer">完全免费，所有玩法都可以通过游戏内获取。</div>
+    </div>
+  </section>
+
+  <!-- 页脚 -->
+  <footer>
+    <p>栖云服务器 | 官方 QQ 群：675736013</p>
+    <p>Powered by QiYun | Copyright © 2026</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

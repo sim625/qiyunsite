@@ -1,0 +1,277 @@
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+  background: #0d1117;
+  color: #c9d1d9;
+  line-height: 1.6;
+}
+
+/* 导航栏 */
+.navbar {
+  position: fixed; top: 0; left: 0; right: 0;
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 16px 40px;
+  background: rgba(13, 17, 23, 0.9);
+  backdrop-filter: blur(10px);
+  z-index: 100;
+}
+.nav-logo { font-size: 20px; font-weight: bold; color: #58a6ff; }
+.nav-links { list-style: none; display: flex; gap: 24px; }
+.nav-links a { color: #c9d1d9; text-decoration: none; transition: color 0.2s; }
+.nav-links a:hover { color: #58a6ff; }
+
+/* 首屏 */
+.hero {
+  height: 100vh;
+  display: flex; flex-direction: column;
+  justify-content: center; align-items: center;
+  text-align: center;
+  background: transparent;
+  padding: 0 20px;
+}
+.hero h1 { font-size: 64px; color: #58a6ff; margin-bottom: 16px; }
+.slogan { font-size: 20px; color: #8b949e; margin-bottom: 32px; }
+.hero-info { display: flex; gap: 32px; margin-bottom: 40px; font-size: 16px; }
+.hero-info strong { color: #58a6ff; }
+.btn {
+  display: inline-block;
+  padding: 12px 32px;
+  background: #238636;
+  color: #fff;
+  border-radius: 6px;
+  text-decoration: none;
+  font-size: 16px;
+  transition: background 0.2s;
+}
+.btn:hover { background: #2ea043; }
+
+/* 数据卡片 */
+.stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+  padding: 60px 40px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.stat-card {
+  background: #161b22;
+  border: 1px solid #30363d;
+  border-radius: 8px;
+  padding: 32px 20px;
+  text-align: center;
+}
+.stat-num { font-size: 36px; font-weight: bold; color: #58a6ff; }
+.stat-label { font-size: 14px; color: #8b949e; margin-top: 8px; }
+
+/* 通用 section */
+.section { padding: 80px 40px; max-width: 1200px; margin: 0 auto; }
+.section h2 { font-size: 32px; margin-bottom: 40px; text-align: center; color: #58a6ff; }
+
+/* 分区卡片 */
+.server-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px;
+}
+.server-card {
+  background: #161b22;
+  border: 1px solid #30363d;
+  border-radius: 8px;
+  padding: 24px;
+  transition: transform 0.2s, border-color 0.2s;
+}
+.server-card:hover { transform: translateY(-4px); border-color: #58a6ff; }
+.server-card h3 { color: #58a6ff; margin-bottom: 12px; }
+.server-ip {
+  margin-top: 16px; padding: 8px 12px;
+  background: #0d1117; border-radius: 4px;
+  font-family: "Consolas", "Cascadia Mono", "Microsoft YaHei", monospace;
+  color: #7ee787;
+  font-size: 14px;
+  letter-spacing: 0.5px;
+}
+
+/* 鸣谢 */
+.thanks-intro { text-align: center; color: #8b949e; margin-bottom: 32px; }
+.thanks-table {
+  width: 100%; border-collapse: collapse;
+  background: #161b22; border-radius: 8px; overflow: hidden;
+}
+.thanks-table th, .thanks-table td {
+  padding: 14px 20px; text-align: left; border-bottom: 1px solid #30363d;
+}
+.thanks-table th { background: #21262d; color: #58a6ff; }
+
+/* FAQ */
+.faq-item { margin-bottom: 12px; }
+.faq-question {
+  width: 100%; text-align: left;
+  padding: 16px 20px;
+  background: #161b22;
+  border: 1px solid #30363d;
+  border-radius: 6px;
+  color: #c9d1d9;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.faq-question:hover { background: #21262d; }
+.faq-answer {
+  display: none;
+  padding: 16px 20px;
+  background: #0d1117;
+  border: 1px solid #30363d;
+  border-top: none;
+  border-radius: 0 0 6px 6px;
+  color: #8b949e;
+}
+.faq-answer code {
+  background: #21262d; padding: 2px 6px; border-radius: 4px;
+  color: #7ee787; font-family: monospace;
+}
+
+/* 页脚 */
+footer {
+  text-align: center; padding: 40px 20px;
+  border-top: 1px solid #30363d;
+  color: #8b949e; font-size: 14px;
+}
+
+/* 响应式 */
+@media (max-width: 768px) {
+  .navbar { padding: 12px 20px; }
+  .nav-links { gap: 16px; font-size: 14px; }
+  .hero h1 { font-size: 40px; }
+  .hero-info { flex-direction: column; gap: 8px; }
+  .section { padding: 60px 20px; }
+}
+
+/* 群号悬停二维码 */
+.group-hover {
+  position: relative;
+  cursor: pointer;
+}
+
+.qrcode-popup {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  margin-top: 12px;
+  width: 180px;
+  height: 180px;
+  background: #fff;
+  padding: 8px;
+  border-radius: 8px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+  z-index: 200;
+  pointer-events: none;
+}
+
+.group-hover:hover .qrcode-popup {
+  display: block;
+}
+
+/* 动态流动背景 */
+body::before {
+  content: "";
+  position: fixed;
+  top: 0; left: 0;
+  width: 200%;
+  height: 200%;
+  z-index: -1;
+  background: radial-gradient(circle at 20% 30%, #1f6feb33 0%, transparent 40%),
+              radial-gradient(circle at 80% 70%, #23863633 0%, transparent 40%),
+              radial-gradient(circle at 50% 50%, #58a6ff1a 0%, transparent 50%),
+              #0d1117;
+  animation: bgFloat 20s ease-in-out infinite alternate;
+}
+
+@keyframes bgFloat {
+  0% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(-5%, -5%) scale(1.1); }
+  100% { transform: translate(5%, 5%) scale(1); }
+}
+
+/* 博客页面 */
+.blog-section {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 120px 40px 80px;
+}
+
+.blog-section h1 {
+  font-size: 36px;
+  color: #58a6ff;
+  margin-bottom: 48px;
+  text-align: center;
+}
+
+/* 博客文章卡片 */
+.blog-post {
+  background: #161b22;
+  border: 1px solid #30363d;
+  border-radius: 8px;
+  padding: 24px 28px;
+  margin-bottom: 24px;
+  transition: border-color 0.2s;
+}
+
+.blog-post:hover {
+  border-color: #58a6ff;
+}
+
+/* 头部：头像 + 名称 + 时间 */
+.blog-header {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 18px;
+}
+
+.blog-avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #30363d;
+  flex-shrink: 0;
+}
+
+.blog-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.blog-author {
+  font-size: 16px;
+  font-weight: bold;
+  color: #58a6ff;
+}
+
+.blog-date {
+  font-size: 13px;
+  color: #8b949e;
+}
+
+/* 内容 */
+.blog-content h2 {
+  font-size: 20px;
+  color: #c9d1d9;
+  margin-bottom: 14px;
+}
+
+.blog-content p {
+  font-size: 15px;
+  color: #c9d1d9;
+  margin-bottom: 10px;
+  line-height: 1.8;
+}
+
+@media (max-width: 768px) {
+  .blog-post { padding: 18px; }
+  .blog-avatar { width: 40px; height: 40px; }
+  .blog-content h2 { font-size: 18px; }
+}
