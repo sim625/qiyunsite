@@ -6,23 +6,31 @@
   <title>栖云服务器 | 红石生电 · 休闲生存</title>
   <link rel="stylesheet" href="style.css">
 </head>
-<body>
+<body data-current-page="home">
+  <!-- 顶部提示框 -->
+  <div class="toast" id="toast">
+    <div class="toast-text">又被我整到了吧~你好坏！</div>
+    <div class="toast-bar"><div class="toast-bar-fill"></div></div>
+  </div>
+
   <!-- 导航栏 -->
   <nav class="navbar">
     <div class="nav-logo">栖云服务器</div>
     <ul class="nav-links">
-      <li><a href="#home">首页</a></li>
-      <li><a href="#servers">分区</a></li>
-      <li><a href="#thanks">鸣谢</a></li>
-      <li><a href="#faq">常见问题 FAQ</a></li>
-	  <li><a href="blog.html">公告 & 博客</a></li>
+      <li><a href="#home" data-page="home">首页</a></li>
+      <li><a href="#servers" data-page="servers">分区</a></li>
+      <li><a href="#rules" data-page="rules">规则</a></li>
+      <li><a href="#thanks" data-page="thanks">鸣谢</a></li>
+      <li><a href="#faq" data-page="faq">常见问题</a></li>
+      <li><a href="blog.html" data-page="blog">博客</a></li>
+      <li><a href="admin.html" data-page="admin">管理团队</a></li>
     </ul>
   </nav>
 
   <!-- 首屏 -->
   <section id="home" class="hero">
     <h1>栖云服务器</h1>
-    <p class="slogan">红石生电 · 休闲生存 · 原版客户端即可加入</p>
+    <p class="slogan" id="slogan"></p>
     <div class="hero-info">
       <span>已持续运营 <strong id="days">0</strong> 天</span>
       <span class="group-hover">
@@ -30,25 +38,29 @@
         <img src="qrcode.png" alt="群二维码" class="qrcode-popup">
       </span>
     </div>
-    <a href="#servers" class="btn">查看服务器地址</a>
+    <div class="hero-btns">
+      <a href="#servers" class="btn">服务器地址</a>
+      <a href="https://qm.qq.com/q/H8rvoMm4i4" target="_blank" class="btn btn-blue">加入官方群</a>
+      <a href="blog.html" class="btn btn-purple">查看博客</a>
+    </div>
   </section>
 
   <!-- 数据卡片 -->
   <section class="stats">
     <div class="stat-card">
-      <div class="stat-num" id="stat-days">0</div>
+      <div class="stat-num" id="stat-days" data-target="0">0</div>
       <div class="stat-label">持续运营（天）</div>
     </div>
     <div class="stat-card">
-      <div class="stat-num">1.21.11</div>
+      <div class="stat-num" data-target="1.21.11">0</div>
       <div class="stat-label">服务器版本</div>
     </div>
     <div class="stat-card">
-      <div class="stat-num">1.10~26.3</div>
+      <div class="stat-num" data-target="1.10~26.3">0</div>
       <div class="stat-label">支持版本</div>
     </div>
     <div class="stat-card">
-      <div class="stat-num">28</div>
+      <div class="stat-num" data-target="28">0</div>
       <div class="stat-label">群人数</div>
     </div>
   </section>
@@ -60,7 +72,49 @@
       <div class="server-card">
         <h3>主服</h3>
         <p>Paper 1.21.11，红石生电、商店经济、领地保护、点歌系统。</p>
-        <p class="server-ip">qiyunmcs.duckdns.org:25565</p>
+        <div class="server-ip-row">
+          <p class="server-ip">qiyunmcs.duckdns.org:25565</p>
+          <button class="copy-btn" data-copy="qiyunmcs.duckdns.org:25565">复制</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 服务器规则（不折叠） -->
+  <section id="rules" class="section">
+    <h2>服务器规则</h2>
+    <div class="rules-list">
+      <div class="rule-item">
+        <h3>1. 外挂作弊</h3>
+        <p>严禁使用外挂、作弊模组、自动攻击、自动挖矿及其他自动化脚本，发现后直接封禁。</p>
+      </div>
+      <div class="rule-item">
+        <h3>2. 善待新人</h3>
+        <p>禁止蹲守新手区域、恶意击杀、骚扰辱骂、欺骗财物或冒充管理员。</p>
+      </div>
+      <div class="rule-item">
+        <h3>3. 财产保护</h3>
+        <p>禁止破坏、偷窃他人财物，以及损坏野外建筑、出生点、商店等公共设施。</p>
+      </div>
+      <div class="rule-item">
+        <h3>4. 建筑规范</h3>
+        <p>禁止建造色情、血腥、歧视、仇恨或针对他人的冒犯性内容，违规建筑将被拆除。</p>
+      </div>
+      <div class="rule-item">
+        <h3>5. 服务器性能</h3>
+        <p>在线人数较多时，请暂停高负载红石机器、大型农场及刷怪塔，避免造成全服卡顿。</p>
+      </div>
+      <div class="rule-item">
+        <h3>6. 聊天礼仪</h3>
+        <p>禁止刷屏、广告、辱骂、引战、泄露他人隐私及反复@他人；禁止讨论现实政治、敏感时政，或使用谐音、图片、表情包等进行影射和引战。</p>
+      </div>
+      <div class="rule-item">
+        <h3>7. 经济漏洞</h3>
+        <p>禁止利用复制、商店、任务、签到、限购等漏洞获利；非法所得将被清空。主动报告漏洞可酌情奖励。</p>
+      </div>
+      <div class="rule-item">
+        <h3>8. 处罚申诉</h3>
+        <p>违规一般按“警告→禁言→临时封禁/移出群聊→永久封禁”处理；情节严重者可直接从重处罚。如有异议，可联系管理员申诉。</p>
       </div>
     </div>
   </section>
@@ -74,9 +128,26 @@
         <tr><th>玩家</th><th>贡献</th></tr>
       </thead>
       <tbody>
-        <tr><td>chara</td><td>商店建设、材料收集</td></tr>
-        <tr><td>hajimi</td><td>刷铁机、红石机器</td></tr>
-        <tr><td>B2XC</td><td>甘蔗机、红石机器</td></tr>
+        <tr>
+          <td class="player-name" data-tip="哈哈哈，皮一下，点击可消除">Louis</td>
+          <td>商店</td>
+        </tr>
+        <tr>
+          <td>hajimi</td>
+          <td>商店</td>
+        </tr>
+        <tr>
+          <td>chara</td>
+          <td>商店</td>
+        </tr>
+        <tr>
+          <td>GrislyYak8353</td>
+          <td>建设小黑塔</td>
+        </tr>
+        <tr>
+          <td>B2XC</td>
+          <td>建设小黑塔</td>
+        </tr>
       </tbody>
     </table>
   </section>
