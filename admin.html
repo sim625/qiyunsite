@@ -7,6 +7,15 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body data-current-page="admin">
+  <!-- 加载动画 -->
+  <div class="loader" id="loader">
+    <div class="loader-logo">   栖云正在奋力加载中……</div>
+    <div class="loader-bar"><div class="loader-bar-fill"></div></div>
+  </div>
+
+  <!-- 鼠标光效 -->
+  <div class="cursor-glow" id="cursorGlow"></div>
+
   <!-- 顶部提示框 -->
   <div class="toast" id="toast">
     <div class="toast-text">又被我整到了吧~你好坏！</div>
@@ -16,7 +25,8 @@
   <!-- 导航栏 -->
   <nav class="navbar">
     <div class="nav-logo">栖云服务器</div>
-    <ul class="nav-links">
+    <button class="nav-toggle" id="navToggle">☰</button>
+    <ul class="nav-links" id="navLinks">
       <li><a href="index.html" data-page="home">首页</a></li>
       <li><a href="index.html#servers" data-page="servers">分区</a></li>
       <li><a href="index.html#rules" data-page="rules">规则</a></li>
@@ -27,10 +37,8 @@
     </ul>
   </nav>
 
-  <!-- 管理人员名单 -->
   <section class="admin-section">
     <h1>管理人员名单</h1>
-
     <div class="admin-list">
       <div class="admin-card">
         <div class="admin-name">Louis</div>
@@ -39,18 +47,16 @@
       </div>
       <div class="admin-card">
         <div class="admin-name">GrislyYak8353</div>
-        <div class="admin-role">服务器规则管理及处罚</div>
+        <div class="admin-role">管理</div>
       </div>
       <div class="admin-card">
         <div class="admin-name">hajimi</div>
-        <div class="admin-role">插件管理</div>
+        <div class="admin-role">管理</div>
       </div>
     </div>
-
     <p class="admin-footer-note">什么？你也想当管理员？那可得先问问 Louis 同不同意，再问问 GrislyYak8353 和 hajimi 愿不愿意带你，最后还得看你自己有没有那个本事。总之，先好好玩，别惹事，说不定哪天就被看中了呢。</p>
   </section>
 
-  <!-- 页脚 -->
   <footer>
     <p>栖云服务器 | 官方 QQ 群：675736013</p>
     <p>Powered by QiYun | Copyright © 2026</p>

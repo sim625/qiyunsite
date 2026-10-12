@@ -22,6 +22,7 @@ document.querySelectorAll(".faq-question").forEach(btn => {
 const sloganText = "红石生电 · 休闲生存 · 原版客户端即可加入";
 const sloganEl = document.getElementById("slogan");
 if (sloganEl) {
+  sloganEl.textContent = "";  // 先清空
   let i = 0;
   function typeWriter() {
     if (i < sloganText.length) {
@@ -179,3 +180,66 @@ document.querySelectorAll(".player-name").forEach(el => {
     showToast(DEFAULT_TOAST_TEXT);
   });
 });
+// ============ 加载动画 ============
+const loader = document.getElementById("loader");
+if (loader) {
+  window.addEventListener("load", () => {
+    setTimeout(() => {
+      loader.classList.add("hide");
+      setTimeout(() => loader.remove(), 500);
+    }, 800);
+  });
+}
+
+// ============ 鼠标光效 ============
+const cursorGlow = document.getElementById("cursorGlow");
+if (cursorGlow) {
+  document.addEventListener("mousemove", (e) => {
+    cursorGlow.style.left = e.clientX + "px";
+    cursorGlow.style.top = e.clientY + "px";
+    cursorGlow.classList.add("active");
+  });
+  document.addEventListener("mouseleave", () => {
+    cursorGlow.classList.remove("active");
+  });
+}
+
+// ============ 手机端汉堡菜单 ============
+const navToggle = document.getElementById("navToggle");
+const navLinksEl = document.getElementById("navLinks");
+
+if (navToggle && navLinksEl) {
+  navToggle.addEventListener("click", () => {
+    navLinksEl.classList.toggle("open");
+  });
+}
+// ============ 点击 Logo 彩蛋 ============
+const navLogo = document.querySelector(".nav-logo");
+if (navLogo) {
+  let logoClickCount = 0;
+  let logoTimer = null;
+
+  navLogo.style.cursor = "pointer";
+  navLogo.style.userSelect = "none";
+
+  navLogo.addEventListener("click", () => {
+    logoClickCount++;
+
+    // 重置计时器，2 秒内没继续点就清零
+    if (logoTimer) clearTimeout(logoTimer);
+    logoTimer = setTimeout(() => {
+      logoClickCount = 0;
+    }, 2000);
+
+    if (logoClickCount >= 5) {
+      showToast("一直戳我干嘛！还不赶快去栖云服玩！");
+      logoClickCount = 0;
+      if (logoTimer) clearTimeout(logoTimer);
+    }
+  });
+}
+
+// ============ 禁止复制/右键 ============
+document.addEventListener("copy", (e) => e.preventDefault());
+document.addEventListener("cut", (e) => e.preventDefault());
+document.addEventListener("contextmenu", (e) => e.preventDefault());
