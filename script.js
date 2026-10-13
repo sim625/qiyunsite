@@ -523,6 +523,8 @@ const echoMessages = [
   "别忘了带食物。",
   "别忘了带火把。",
   "别忘了带自己。"
+  "「你知道吗？」 我不知道",
+  "「你知道吗？」 栖云服务器有很多彩蛋……"
 ];
 
 const echoBtn = document.getElementById("echoCave");
