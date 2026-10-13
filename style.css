@@ -164,7 +164,7 @@ body {
 .copy-btn:hover { background: #30363d; border-color: #58a6ff; color: #58a6ff; }
 .copy-btn.copied { background: #238636; color: #fff; border-color: #238636; }
 
-/* 服务器规则（不折叠） */
+/* 服务器规则 */
 .rules-list { max-width: 900px; margin: 0 auto; }
 .rule-item {
   background: #161b22;
@@ -326,20 +326,6 @@ footer {
   border-top: 1px solid #30363d;
 }
 
-/* 响应式 */
-@media (max-width: 768px) {
-  .navbar { padding: 12px 20px; }
-  .nav-links { gap: 10px; font-size: 12px; }
-  .hero h1 { font-size: 40px; }
-  .hero-info { flex-direction: column; gap: 8px; }
-  .hero-btns { flex-direction: column; }
-  .section { padding: 60px 20px; }
-  .server-ip-row { flex-direction: column; align-items: stretch; }
-  .admin-section { padding: 100px 20px 60px; }
-  .admin-section h1 { font-size: 28px; }
-  .admin-card { padding: 18px 20px; }
-}
-
 /* 群号悬停二维码 */
 .group-hover { position: relative; cursor: pointer; }
 .qrcode-popup {
@@ -376,7 +362,7 @@ body::before {
   100% { transform: translate(5%, 5%) scale(1); }
 }
 
-/* 博客页面（保留原有） */
+/* 博客页面 */
 .blog-section { max-width: 900px; margin: 0 auto; padding: 120px 40px 80px; }
 .blog-section h1 { font-size: 36px; color: #58a6ff; margin-bottom: 48px; text-align: center; }
 .blog-post {
@@ -391,11 +377,7 @@ body::before {
 .blog-date { font-size: 13px; color: #8b949e; }
 .blog-content h2 { font-size: 20px; color: #c9d1d9; margin-bottom: 14px; }
 .blog-content p { font-size: 15px; color: #c9d1d9; margin-bottom: 10px; line-height: 1.8; }
-@media (max-width: 768px) {
-  .blog-post { padding: 18px; }
-  .blog-avatar { width: 40px; height: 40px; }
-  .blog-content h2 { font-size: 18px; }
-}
+
 /* ============ 加载动画 ============ */
 .loader {
   position: fixed;
@@ -462,17 +444,130 @@ body::before {
   opacity: 1;
 }
 
-/* ============ 手机端汉堡菜单 ============ */
-.nav-toggle {
-  display: none;
-  background: none;
-  border: none;
-  color: #58a6ff;
-  font-size: 24px;
-  cursor: pointer;
-  padding: 4px 8px;
+/* 禁止框选 */
+body {
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+}
+input, textarea, code {
+  user-select: text;
+  -webkit-user-select: text;
 }
 
+/* ============ 工具页 ============ */
+.tools-section {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 120px 40px 80px;
+  text-align: center;
+}
+.tools-section h1 {
+  font-size: 36px;
+  color: #58a6ff;
+  margin-bottom: 12px;
+}
+.tools-intro {
+  color: #8b949e;
+  margin-bottom: 48px;
+  font-size: 15px;
+}
+.tools-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  width: 100%;
+  margin-top: 32px;
+}
+
+.pcl-btn {
+  flex: 1 1 auto;
+  min-width: 100px;
+  padding: 12px 16px;
+  background: transparent;
+  color: #c9d1d9;
+  border: 1px solid #30363d;
+  border-radius: 4px;
+  font-size: 14px;
+  font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+  cursor: pointer;
+  transition: border-color 0.15s, background 0.15s, color 0.15s, transform 0.05s;
+  user-select: none;
+  white-space: nowrap;
+}
+.pcl-btn:hover {
+  border-color: #4a9eff;
+  color: #58a6ff;
+  background: rgba(74, 158, 255, 0.08);
+}
+.pcl-btn:active {
+  transform: translateY(1px);
+  background: rgba(74, 158, 255, 0.15);
+}
+
+.pcl-btn.danger {
+  color: #f85149;
+  border-color: #f85149;
+}
+.pcl-btn.danger:hover {
+  background: rgba(248, 81, 73, 0.1);
+  border-color: #f85149;
+  color: #f85149;
+}
+.pcl-btn.danger:active {
+  background: rgba(248, 81, 73, 0.18);
+}
+.pcl-btn.no-grow {
+  flex: 0 0 auto;
+}
+
+/* 按钮悬停提示 */
+.pcl-btn[data-tip] {
+  position: relative;
+}
+.pcl-btn[data-tip]::after {
+  content: attr(data-tip);
+  position: absolute;
+  left: 50%;
+  bottom: 100%;
+  transform: translateX(-50%) translateY(-8px);
+  background: #21262d;
+  color: #c9d1d9;
+  padding: 8px 12px;
+  border-radius: 6px;
+  border: 1px solid #30363d;
+  font-size: 13px;
+  font-weight: normal;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s, transform 0.2s;
+  z-index: 10;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+}
+.pcl-btn[data-tip]::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: 100%;
+  transform: translateX(-50%);
+  border: 6px solid transparent;
+  border-top-color: #30363d;
+  opacity: 0;
+  transition: opacity 0.2s;
+  pointer-events: none;
+  z-index: 11;
+}
+.pcl-btn[data-tip]:hover::after {
+  opacity: 1;
+  transform: translateX(-50%) translateY(-12px);
+}
+.pcl-btn[data-tip]:hover::before {
+  opacity: 1;
+}
+
+/* ============ 手机端 ============ */
 @media (max-width: 768px) {
   .navbar {
     padding: 12px 20px;
@@ -497,18 +592,114 @@ body::before {
     font-size: 15px;
     padding: 6px 0;
   }
+  .hero h1 { font-size: 40px; }
+  .hero-info { flex-direction: column; gap: 8px; }
+  .hero-btns { flex-direction: column; }
+  .section { padding: 60px 20px; }
+  .server-ip-row { flex-direction: column; align-items: stretch; }
+  .admin-section { padding: 100px 20px 60px; }
+  .admin-section h1 { font-size: 28px; }
+  .admin-card { padding: 18px 20px; }
+  .blog-post { padding: 18px; }
+  .blog-avatar { width: 40px; height: 40px; }
+  .blog-content h2 { font-size: 18px; }
+  .loader-logo {
+    font-size: 32px;
+    margin-bottom: 16px;
+  }
+  .loader-bar {
+    width: 150px;
+  }
 }
 
-/* 禁止框选 */
-body {
+/* 汉堡按钮，桌面端隐藏 */
+.nav-toggle {
+  display: none;
+  background: none;
+  border: none;
+  color: #58a6ff;
+  font-size: 24px;
+  cursor: pointer;
+  padding: 4px 8px;
+}
+
+/* 小白旗：液态玻璃圆 */
+.surrender-btn {
+  position: fixed;
+  right: 30px;
+  bottom: 30px;
+  width: 64px;
+  height: 64px;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+  cursor: pointer;
+  z-index: 9998;
   user-select: none;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(16px) saturate(180%);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.4),
+    inset 0 1px 1px rgba(255, 255, 255, 0.25),
+    inset 0 -1px 1px rgba(255, 255, 255, 0.05);
+  transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
+}
+.surrender-btn:hover {
+  transform: scale(1.1);
+  background: rgba(255, 255, 255, 0.14);
+  box-shadow:
+    0 12px 40px rgba(88, 166, 255, 0.35),
+    inset 0 1px 1px rgba(255, 255, 255, 0.35),
+    inset 0 -1px 1px rgba(255, 255, 255, 0.08);
+}
+.surrender-btn.show {
+  display: flex;
 }
 
-/* 允许输入框和代码块选中 */
-input, textarea, code {
-  user-select: text;
-  -webkit-user-select: text;
+/* 追逐战按钮 */
+.pcl-btn.chase-running {
+  position: fixed;
+  z-index: 9997;
+  transition: left 0.15s ease-out, top 0.15s ease-out;
+}
+
+/* 小白旗：液态玻璃圆 */
+.surrender-btn {
+  position: fixed;
+  right: 30px;
+  bottom: 30px;
+  width: 64px;
+  height: 64px;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+  cursor: pointer;
+  z-index: 9998;
+  user-select: none;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(16px) saturate(180%);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.4),
+    inset 0 1px 1px rgba(255, 255, 255, 0.25),
+    inset 0 -1px 1px rgba(255, 255, 255, 0.05);
+  transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
+}
+.surrender-btn:hover {
+  transform: scale(1.1);
+  background: rgba(255, 255, 255, 0.14);
+  box-shadow:
+    0 12px 40px rgba(88, 166, 255, 0.35),
+    inset 0 1px 1px rgba(255, 255, 255, 0.35),
+    inset 0 -1px 1px rgba(255, 255, 255, 0.08);
+}
+.surrender-btn.show {
+  display: flex;
 }
