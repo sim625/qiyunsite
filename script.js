@@ -22,7 +22,7 @@ document.querySelectorAll(".faq-question").forEach(btn => {
 const sloganText = "红石生电 · 休闲生存 · 原版客户端即可加入";
 const sloganEl = document.getElementById("slogan");
 if (sloganEl) {
-  sloganEl.textContent = "";  // 先清空
+  sloganEl.textContent = "";
   let i = 0;
   function typeWriter() {
     if (i < sloganText.length) {
@@ -108,12 +108,9 @@ if (sections.length > 0) {
       const top = sec.offsetTop - 100;
       if (window.scrollY >= top) current = sec.getAttribute("id");
     });
-
-    // 如果滚到页面最底部，强制高亮最后一个板块
     if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 5) {
       current = sections[sections.length - 1].getAttribute("id");
     }
-
     navLinks.forEach(link => {
       link.classList.remove("active");
       if (link.getAttribute("href") === "#" + current) {
@@ -123,45 +120,72 @@ if (sections.length > 0) {
   });
 }
 
-// ============ 通用提示框 ============
+// ============ 通用提示框（排队版） ============
 const toast = document.getElementById("toast");
-let toastTimer = null;
-let toastHideTimer = null;
+let toastQueue = [];
+let toastPlaying = false;
 
 const DEFAULT_TOAST_TEXT = "又被我整到了吧~你好坏！";
 const PAGE_TOAST_TEXT = "已经在这个页面了~ 或者…… 你在尝试找到所有彩蛋？那是不可能的！";
 
 function showToast(message) {
+  toastQueue.push({ type: "text", message: message });
+  playToastQueue();
+}
+
+function typewriterToast(message) {
+  toastQueue.push({ type: "type", message: message });
+  playToastQueue();
+}
+
+function playToastQueue() {
+  if (toastPlaying) return;
+  if (toastQueue.length === 0) return;
   if (!toast) return;
+
+  toastPlaying = true;
+  const item = toastQueue.shift();
   const toastText = toast.querySelector(".toast-text");
   const toastBarFill = toast.querySelector(".toast-bar-fill");
-
-  if (toastTimer) clearTimeout(toastTimer);
-  if (toastHideTimer) clearTimeout(toastHideTimer);
-
-  toastText.textContent = message;
 
   toast.classList.remove("show");
   toastBarFill.style.animation = "none";
   void toast.offsetWidth;
   toastBarFill.style.animation = "";
+  requestAnimationFrame(() => toast.classList.add("show"));
 
-  requestAnimationFrame(() => {
-    toast.classList.add("show");
-  });
+  let totalTime;
 
-  toastTimer = setTimeout(() => {
+  if (item.type === "type") {
+    toastText.textContent = "";
+    let i = 0;
+    function typeChar() {
+      if (i < item.message.length) {
+        toastText.textContent += item.message.charAt(i);
+        i++;
+        setTimeout(typeChar, 60);
+      }
+    }
+    typeChar();
+    totalTime = item.message.length * 60 + 2000;
+  } else {
+    toastText.textContent = item.message;
+    totalTime = 3000;
+  }
+
+  setTimeout(() => {
     toast.classList.remove("show");
-    toastHideTimer = setTimeout(() => {
+    setTimeout(() => {
       toastText.textContent = DEFAULT_TOAST_TEXT;
+      toastPlaying = false;
+      playToastQueue();
     }, 320);
-  }, 3000);
+  }, totalTime);
 }
 
 // ============ 导航栏彩蛋 ============
 const currentPageId = document.body.getAttribute("data-current-page") || "home";
 
-// 只有非首页才检测
 if (currentPageId !== "home") {
   document.querySelectorAll(".nav-links a").forEach(link => {
     link.addEventListener("click", (e) => {
@@ -180,6 +204,7 @@ document.querySelectorAll(".player-name").forEach(el => {
     showToast(DEFAULT_TOAST_TEXT);
   });
 });
+
 // ============ 加载动画 ============
 const loader = document.getElementById("loader");
 if (loader) {
@@ -213,6 +238,7 @@ if (navToggle && navLinksEl) {
     navLinksEl.classList.toggle("open");
   });
 }
+
 // ============ 点击 Logo 彩蛋 ============
 const navLogo = document.querySelector(".nav-logo");
 if (navLogo) {
@@ -224,8 +250,6 @@ if (navLogo) {
 
   navLogo.addEventListener("click", () => {
     logoClickCount++;
-
-    // 重置计时器，2 秒内没继续点就清零
     if (logoTimer) clearTimeout(logoTimer);
     logoTimer = setTimeout(() => {
       logoClickCount = 0;
@@ -296,9 +320,9 @@ if (neverClickBtn) {
     showToast("嘿！别点我啦！如果你这么闲可以去栖云看看！");
   });
 }
-// ============ 回声洞·抽象加长版 ============
+
+// ============ 回声洞 ============
 const echoMessages = [
-  // 基础回声
   "这里是回声洞……",
   "你说的每一句话，都会被山谷记住。",
   "栖云之上，云海翻涌。",
@@ -309,8 +333,6 @@ const echoMessages = [
   "愿你的背包永远不炸。",
   "苦力怕：嘶——",
   "欢迎来到栖云，祝你玩得开心。",
-
-  // 经典抽象
   "\"白天晚上，白天晚上，白天晚上，白天晚上，白天晚上……\"你的假期就这么过去了？",
   "开始了？结束了？",
   "巴山楚水凄凉地，李白单杀白居易",
@@ -321,8 +343,6 @@ const echoMessages = [
   "你睡的不是觉，是离线挂机。",
   "你吃的不是面包，是饱食度。",
   "你喝的不是药水，是短暂的希望。",
-
-  // 栖云哲学
   "栖云不是地方，栖云是一种延迟。",
   "云海翻涌，而你还在加载区块。",
   "山不说话，是因为它在等服务器重启。",
@@ -333,8 +353,6 @@ const echoMessages = [
   "TNT 不知道答案，但它能让你忘记问题。",
   "末影人搬走了你的方块，也搬走了你的初心。",
   "村民哼了一声，世界就涨价了。",
-
-  // 抽象诗句
   "床前明月光，疑似地上霜，举头望明月，低头在挖矿。",
   "春眠不觉晓，处处闻苦力怕。",
   "夜来风雨声，钻石落谁家。",
@@ -345,8 +363,6 @@ const echoMessages = [
   "人生自古谁无死，留取丹心照汗青，然后掉进岩浆。",
   "天生我材必有用，千金散尽还复来，然后背包满了。",
   "山重水复疑无路，柳暗花明又一村，然后迷路了。",
-
-  // 服务器日常
   "服务器卡了，但你的心还在跳。",
   "TPS 低了，梦想也低了。",
   "有人在主城挂机，有人在末地失踪。",
@@ -357,8 +373,6 @@ const echoMessages = [
   "重启能解决 99% 的问题，剩下的 1% 是你不肯重启。",
   "你以为是网络问题，其实是命运。",
   "你以为是命运，其实是没开加速器。",
-
-  // 挖矿抽象
   "挖矿挖到 bedrock，人生挖到边界。",
   "钻石就在下一格，下一格永远是岩浆。",
   "你向右挖，左边塌了。",
@@ -369,8 +383,6 @@ const echoMessages = [
   "你原地不动，苦力怕也来了。",
   "你挖到了远古残骸，也挖到了孤独。",
   "你挖到了下界合金，也挖到了凌晨四点。",
-
-  // 钓鱼抽象
   "钓鱼佬永不空军，除非服务器维护。",
   "你钓上来一本书，书名是《如何不钓鱼》。",
   "你钓上来一只靴子，靴子里有一封信，信上写着：再钓一会儿。",
@@ -381,8 +393,6 @@ const echoMessages = [
   "你钓上来一个头颅，头颅说：别钓了。",
   "你钓上来一个音乐唱片，播放的是：服务器已关闭。",
   "你钓上来一个命令方块，里面写着：/kill @e[type=player]。",
-
-  // 建筑抽象
   "你建了一座城堡，苦力怕说：我帮你装修。",
   "你建了一座塔，塔顶有一只鸡。",
   "你建了一座桥，桥下是虚空。",
@@ -393,8 +403,6 @@ const echoMessages = [
   "你建了一座教堂，村民在里面交易。",
   "你建了一座雕像，雕像长得像你，但更快乐。",
   "你建了一座城，城里只有你。",
-
-  // 红石抽象
   "红石机器在响，邻居在骂。",
   "你做了个自动门，门把你夹了。",
   "你做了个自动农场，农场自动消失了。",
@@ -405,8 +413,6 @@ const echoMessages = [
   "你做了个自动刷石机，刷出了你的焦虑。",
   "你做了个自动村民繁殖机，村民开始繁殖机器。",
   "你做了个自动一切，然后你没事干了。",
-
-  // 生物抽象
   "苦力怕：嘶——",
   "骷髅：咻——",
   "蜘蛛：嘶嘶——",
@@ -427,8 +433,6 @@ const echoMessages = [
   "蜜蜂：嗡嗡嗡——",
   "熊猫：嗯——",
   "海豚：叽叽叽——",
-
-  // 抽象对话
   "A：你在干嘛？B：我在等回声。A：回声呢？B：在等我们。",
   "A：栖云怎么走？B：先左转，再右转，然后迷路。",
   "A：有钻石吗？B：有，在梦里。",
@@ -439,8 +443,6 @@ const echoMessages = [
   "A：你为什么不钓鱼？B：因为鱼在钓我。",
   "A：你为什么不建房子？B：因为房子在建我。",
   "A：你为什么不走？B：因为我在等一个方块。",
-
-  // 深夜抽象
   "凌晨三点，红石还在响，你还在想：再挖一格。",
   "凌晨四点，你终于睡了，梦里全是苦力怕。",
   "凌晨五点，服务器重启了，你的梦也重启了。",
@@ -451,8 +453,6 @@ const echoMessages = [
   "早上十点，你发现是你自己拆的。",
   "早上十一点，你决定重新开始。",
   "中午十二点，你还在出生点。",
-
-  // 抽象祝福
   "愿你的钻石永远在下一格。",
   "愿你的苦力怕永远在远处。",
   "愿你的红石永远不炸。",
@@ -463,8 +463,6 @@ const echoMessages = [
   "愿你的床永远不炸。",
   "愿你的重生点永远安全。",
   "愿你的栖云永远不卡。",
-
-  // 抽象诅咒
   "愿你的钻石变成燧石。",
   "愿你的苦力怕永远在你身后。",
   "愿你的红石永远差一格。",
@@ -475,8 +473,6 @@ const echoMessages = [
   "愿你的床永远在岩浆边。",
   "愿你的重生点永远在虚空。",
   "愿你的栖云永远在维护。",
-
-  // 抽象场景
   "你站在山顶，看云海翻涌，然后掉下去了。",
   "你站在矿洞，看岩浆翻涌，然后掉下去了。",
   "你站在末地，看虚空翻涌，然后掉下去了。",
@@ -487,8 +483,6 @@ const echoMessages = [
   "你站在传送门里，看紫光翻涌，然后迷路了。",
   "你站在命令方块前，看代码翻涌，然后世界没了。",
   "你站在回声洞前，看文字翻涌，然后你笑了。",
-
-  // 抽象结局
   "你挖到了世界边界，边界说：回去。",
   "你走到了地图尽头，地图说：再买一张。",
   "你飞到了建筑高度上限，天空说：别飞了。",
@@ -499,8 +493,6 @@ const echoMessages = [
   "你关掉了电脑，电脑说：晚安。",
   "你躺到了床上，床说：别炸我。",
   "你闭上了眼睛，世界说：栖云还在。",
-
-  // 终极抽象
   "你不是在玩栖云，你是在被栖云玩。",
   "你不是在挖矿，你是在挖自己。",
   "你不是在钓鱼，你是在钓时间。",
@@ -511,8 +503,6 @@ const echoMessages = [
   "你不是在挂机，你是在挂念。",
   "你不是在离线，你是在离开。",
   "你不是在回声洞，你是在回声中。",
-
-  // 结尾暴击
   "你说的每一句话，都会被山谷记住。",
   "但山谷很忙，不一定回你。",
   "回声洞没有底，就像你的背包。",
@@ -536,7 +526,6 @@ const echoMessages = [
 ];
 
 const echoBtn = document.getElementById("echoCave");
-
 if (echoBtn) {
   echoBtn.addEventListener("click", () => {
     const msg = echoMessages[Math.floor(Math.random() * echoMessages.length)];
@@ -544,55 +533,18 @@ if (echoBtn) {
   });
 }
 
-// 打字机版 toast
-function typewriterToast(message) {
-  if (!toast) return;
-  const toastText = toast.querySelector(".toast-text");
-  const toastBarFill = toast.querySelector(".toast-bar-fill");
-
-  if (toastTimer) clearTimeout(toastTimer);
-  if (toastHideTimer) clearTimeout(toastHideTimer);
-
-  toastText.textContent = "";
-  toast.classList.remove("show");
-  toastBarFill.style.animation = "none";
-  void toast.offsetWidth;
-  toastBarFill.style.animation = "";
-  requestAnimationFrame(() => toast.classList.add("show"));
-
-  let i = 0;
-  function typeChar() {
-    if (i < message.length) {
-      toastText.textContent += message.charAt(i);
-      i++;
-      setTimeout(typeChar, 60);
-    }
-  }
-  typeChar();
-
-  const totalTime = message.length * 60 + 3000;
-  toastTimer = setTimeout(() => {
-    toast.classList.remove("show");
-    toastHideTimer = setTimeout(() => {
-      toastText.textContent = DEFAULT_TOAST_TEXT;
-    }, 320);
-  }, totalTime);
-}
-
 // ============ 千万别点（真）：随机恶作剧 ============
 const neverClickRealBtn = document.getElementById("neverClickRealBtn");
 
 if (neverClickRealBtn) {
   neverClickRealBtn.addEventListener("click", () => {
-    // 概率：旋转 50%，缩小 20%，虚晃 15%，文字消失 15%
     const r = Math.random();
     let roll;
-    if (r < 0.5) roll = 1;        // 旋转
-    else if (r < 0.7) roll = 0;   // 缩小
-    else if (r < 0.85) roll = 2;  // 虚晃
-    else roll = 3;                // 文字消失
+    if (r < 0.5) roll = 1;
+    else if (r < 0.7) roll = 0;
+    else if (r < 0.85) roll = 2;
+    else roll = 3;
 
-    // 清除之前的效果
     document.body.style.zoom = "";
     document.body.style.transform = "";
     document.body.style.transition = "";
@@ -604,7 +556,6 @@ if (neverClickRealBtn) {
     });
 
     if (roll === 1) {
-      // 旋转：正10圈反10圈循环
       showToast("转起来咯~");
       const style = document.createElement("style");
       style.id = "spinStyle";
@@ -621,7 +572,6 @@ if (neverClickRealBtn) {
       `;
       document.head.appendChild(style);
     } else if (roll === 0) {
-      // 平滑缩小到 10%
       showToast("缩！");
       document.body.style.transition = "transform 3s ease-in-out";
       document.body.style.transformOrigin = "center center";
@@ -629,16 +579,13 @@ if (neverClickRealBtn) {
         document.body.style.transform = "scale(0.1)";
       });
     } else if (roll === 2) {
-      // 虚晃一枪
       showToast("虚晃一枪");
     } else {
-      // 文字消失，UI 保留
       showToast("凭你的记忆来操作吧！");
       const textSelectors = "h1, h2, h3, h4, h5, h6, p, span, a, li, td, th, label, .stat-num, .stat-label, .server-ip, .rule-item p, .rule-item h3, .admin-name, .admin-role, .admin-desc, .blog-author, .blog-date, .blog-content h2, .blog-content p, .faq-question, .faq-answer, .toast-text, .copy-btn, .nav-logo, .nav-links a, .btn, .pcl-btn";
       document.querySelectorAll(textSelectors).forEach(el => {
         el.style.color = "transparent";
       });
-
       const toastEl = document.getElementById("toast");
       if (toastEl) {
         const toastText = toastEl.querySelector(".toast-text");
@@ -655,6 +602,8 @@ const surrenderBtn = document.getElementById("surrenderBtn");
 if (chaseBtn) {
   let isRunning = false;
   let tauntTimer = null;
+  let idleTimer = null;
+  let isDead = false;
 
   const taunts = [
     "来抓我呀~",
@@ -664,8 +613,7 @@ if (chaseBtn) {
     "就这？就这？",
     "你手速不行啊~",
     "追不到追不到~",
-    "闪身步！",
-	"这边建议点击右边的小白旗投降呢~"
+    "菜就多练！"
   ];
 
   const endChase = () => {
@@ -674,6 +622,10 @@ if (chaseBtn) {
     if (tauntTimer) {
       clearInterval(tauntTimer);
       tauntTimer = null;
+    }
+    if (idleTimer) {
+      clearTimeout(idleTimer);
+      idleTimer = null;
     }
 
     const placeholder = document.getElementById("chasePlaceholder");
@@ -685,6 +637,30 @@ if (chaseBtn) {
     chaseBtn.style.width = "";
     if (surrenderBtn) surrenderBtn.classList.remove("show");
     showToast("点我干啥？闲着没事干去栖云玩啊！");
+    restartIdle();
+  };
+
+  const stopForever = () => {
+    if (tauntTimer) {
+      clearInterval(tauntTimer);
+      tauntTimer = null;
+    }
+    if (idleTimer) {
+      clearTimeout(idleTimer);
+      idleTimer = null;
+    }
+
+    const placeholder = document.getElementById("chasePlaceholder");
+    if (placeholder) placeholder.remove();
+
+    chaseBtn.classList.remove("chase-running");
+    chaseBtn.style.left = "";
+    chaseBtn.style.top = "";
+    chaseBtn.style.width = "";
+    if (surrenderBtn) surrenderBtn.classList.remove("show");
+    isRunning = false;
+    isDead = true;
+    showToast("好吧，不理我");
   };
 
   const jumpAway = () => {
@@ -695,10 +671,9 @@ if (chaseBtn) {
   };
 
   const startChase = () => {
-    if (isRunning) return;
+    if (isRunning || isDead) return;
     isRunning = true;
 
-    // 用占位元素补上原位，避免其他按钮留空
     const placeholder = document.createElement("span");
     placeholder.id = "chasePlaceholder";
     placeholder.style.display = "inline-block";
@@ -725,15 +700,35 @@ if (chaseBtn) {
     setTimeout(jumpAway, 50);
   };
 
+  const restartIdle = () => {
+    if (idleTimer) clearTimeout(idleTimer);
+    idleTimer = setTimeout(() => {
+      if (isDead) return;
+      stopForever();
+    }, 10000);
+  };
+
   document.addEventListener("mousemove", (e) => {
+    if (isDead) return;
     const rect = chaseBtn.getBoundingClientRect();
     const btnCenterX = rect.left + rect.width / 2;
     const btnCenterY = rect.top + rect.height / 2;
     const dist = Math.hypot(e.clientX - btnCenterX, e.clientY - btnCenterY);
 
-    if (dist < 150) {
+    if (dist < 120) {
       if (!isRunning) startChase();
       jumpAway();
+      restartIdle();
+    }
+  });
+
+  document.addEventListener("click", (e) => {
+    if (isDead) return;
+    if (chaseBtn === e.target || chaseBtn.contains(e.target)) return;
+    if (surrenderBtn && (surrenderBtn === e.target || surrenderBtn.contains(e.target))) return;
+    const isButton = e.target.closest("button, a, .btn, .pcl-btn, .copy-btn, .faq-question, .player-name, .nav-links a");
+    if (isButton && isRunning) {
+      stopForever();
     }
   });
 
@@ -744,4 +739,6 @@ if (chaseBtn) {
   if (surrenderBtn) {
     surrenderBtn.addEventListener("click", endChase);
   }
+
+  restartIdle();
 }
