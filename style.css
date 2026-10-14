@@ -703,3 +703,11 @@ input, textarea, code {
 .surrender-btn.show {
   display: flex;
 }
+
+.nav-download {
+  color: #7ee787 !important;
+  font-weight: bold;
+}
+.nav-download:hover {
+  color: #3fb950 !important;
+}

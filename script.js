@@ -744,3 +744,11 @@ if (chaseBtn) {
 
   restartIdle();
 }
+
+// ============ 下载整合包 ============
+const downloadPack = document.getElementById("downloadPack");
+if (downloadPack) {
+  downloadPack.addEventListener("click", () => {
+    showToast("下载中，请稍等……");
+  });
+}
