@@ -818,3 +818,126 @@ if (jumpButtons.length > 0) {
     });
   });
 }
+
+// ============ 命令大全 ============
+const commandList = document.getElementById("commandList");
+if (commandList) {
+  // 命令数据，直接写这里
+  const commandsData = [
+    // ===== 账号 =====
+    "注册账号|/reg 密码 重复密码|注册服务器账号。请注意：一定要牢记密码，否则可能丢失所有物品！",
+    "登录服务器|/login 密码|登录服务器，请确保你已经注册了账号",
+
+    // ===== 家 =====
+    "设置家|/sethome 家名字|创建一个独属于您的传送点，适合在野外游荡时快速返回基地",
+    "传送到家|/home 家名字|传送到你设置的传送点，请保证这个传送点存在",
+    "删除家|/delhome 家名字|删除设置的传送点，请注意：此操作不可撤销！",
+    "查看所有家|/homes|查看你已经设置的所有传送点",
+    "回出生点|/spawn|传送回服务器出生点",
+
+    // ===== 传送 =====
+    "请求传送|/tpa 玩家名|向某位玩家请求传送到他身边",
+    "请求对方来|/tpahere 玩家名|请求某位玩家传送到你身边",
+    "接受传送|/tpaccept|同意对方的传送请求",
+    "拒绝传送|/tpdeny|拒绝对方的传送请求",
+    "返回上次位置|/back|回到你上一次死亡或传送前的位置",
+    "传送到地表|/top|传送到你当前所在位置的最高点",
+    "查看坐标|/whereami|显示你现在所在的坐标",
+
+    // ===== 经济 =====
+    "查看余额|/balance|查看自己有多少金币",
+    "转账|/pay 玩家名 金额|给其他玩家转账",
+    "金币排行榜|/baltop|查看服务器金币排行榜",
+    "查看物品价值|/worth|查看手里物品能卖多少钱",
+    "出售手中物品|/sell|出售你手里拿的物品",
+    "出售背包所有|/sell all|出售背包里所有可出售的物品",
+
+    // ===== 商店 =====
+    "打开商店|/shop|打开服务器商店，买卖物品",
+    "创建商店|/qs create 价格|把手里拿的物品创建成商店（需要容器）",
+    "查看商店信息|/qs info|查看你面前商店的详细信息",
+    "查找商店|/qs find 物品名|查找某物品最便宜的商店",
+
+    // ===== 领地 =====
+    "创建领地|/rg create 区域名|创建一块属于自己的领地（需要 WorldEdit 选区）",
+    "添加领地成员|/rg addmember 区域名 玩家名|允许某位玩家在你的领地里活动",
+    "移除领地成员|/rg removemember 区域名 玩家名|取消某位玩家的领地权限",
+    "查看领地信息|/rg info 区域名|查看某块领地的详细信息",
+    "查看领地列表|/rg list|查看你拥有的所有领地",
+
+    // ===== 音乐 =====
+    "点歌|/music search 音乐源 歌曲名|独属于你的休闲时光！如果无法听见音乐，请确认客户端已安装模组“zmusic”任意版本！",
+    "停止播放音乐|/music clear|不想听了，或者想换个听，此命令能满足你的需求",
+
+    // ===== 聊天 =====
+    "私聊|/msg 玩家名 内容|给某位玩家发私聊消息（也可用 /tell、/w）",
+    "回复私聊|/r 内容|回复上一条私聊",
+    "显示消息|/me 内容|显示一条属于你自己的消息（比如动作描述）",
+    "屏蔽私聊|/msgtoggle|开启或关闭接收私聊消息",
+    "忽略玩家|/ignore 玩家名|屏蔽某位玩家的所有消息",
+    "查看在线玩家|/list|查看当前服务器在线玩家",
+    "查看附近玩家|/near|查看你附近有哪些玩家",
+
+    // ===== 邮件 =====
+    "发送邮件|/mail send 玩家名 内容|给不在线的玩家留一条邮件",
+    "查看邮件|/mail read|查看你收到的邮件",
+    "清空邮件|/mail clear|清空你的所有邮件",
+
+    // ===== 物品/工具 =====
+    "打开垃圾桶|/trash|打开一个便携垃圾桶，丢弃不要的物品",
+    "打开工作台|/craft|随时随地打开一个工作台",
+    "打开末影箱|/enderchest|随时随地打开你的末影箱",
+    "查看合成配方|/recipe 物品名|查询某个物品的合成方式",
+    "查看手中物品信息|/iteminfo|查看手里物品的详细数据",
+
+    // ===== 服务器信息 =====
+    "打开服务器菜单|/menu|打开栖云服务器菜单，快速传送到商店、主城、生存区等地",
+    "查看服务器规则|/rules|查看栖云服务器的详细规则",
+    "查看公告|/motd|查看服务器每日公告",
+    "查看帮助|/help|查看服务器帮助菜单",
+    "查看玩家信息|/seen 玩家名|查看某位玩家最后一次在线的时间",
+    "查看在线时间|/playtime|查看你在本服务器的累计游戏时长",
+    "查看延迟|/ping|查看你和服务器之间的网络延迟",
+    "查看服务器TPS|/tps|查看服务器当前运行流畅度",
+    "查看版本信息|/viaversion|查看服务器支持的版本范围",
+    "向管理员求助|/helpop 内容|向在线管理员发送求助消息",
+
+    // ===== 原版基础 =====
+    "触发计分板|/trigger 计分板 值|触发某个计分板（需要服务器设置）",
+    "自杀|/suicide|快速结束自己的生命（不消耗装备耐久）"
+  ];
+
+  let html = "";
+  commandsData.forEach(line => {
+    const parts = line.split("|");
+    if (parts.length < 3) return;
+    const name = parts[0].trim();
+    const cmd = parts[1].trim();
+    const desc = parts[2].trim();
+    const keywords = (name + " " + cmd + " " + desc).toLowerCase();
+    html += `
+      <div class="command-item" data-keywords="${keywords}">
+        <span class="cmd-name">${name}</span>
+        <code>${cmd}</code>
+        <span class="cmd-desc">${desc}</span>
+      </div>
+    `;
+  });
+  commandList.innerHTML = html;
+
+  // 搜索
+  const searchInput = document.getElementById("searchInput");
+  if (searchInput) {
+    searchInput.addEventListener("input", () => {
+      const keyword = searchInput.value.trim().toLowerCase();
+      document.querySelectorAll(".command-item").forEach(item => {
+        const k = item.getAttribute("data-keywords") || "";
+        if (keyword === "" || k.includes(keyword)) {
+          item.classList.remove("hidden");
+        } else {
+          item.classList.add("hidden");
+        }
+      });
+    });
+  }
+}

@@ -210,7 +210,7 @@ input, textarea, code {
 .btn-purple { background: #8957e5; }
 .btn-purple:hover { background: #a371f7; }
 
-/* 数据卡片 */
+/* 数据卡片（顶部从黑渐变到透明） */
 .stats {
   position: relative;
   display: grid;
@@ -222,7 +222,21 @@ input, textarea, code {
   margin: 0 auto;
   max-width: 1200px;
 }
+.stats::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100vw;
+  height: 120px;
+  background: linear-gradient(to bottom, #0d1117, transparent);
+  pointer-events: none;
+  z-index: 0;
+}
 .stat-card {
+  position: relative;
+  z-index: 1;
   background: #161b22;
   border: 1px solid #30363d;
   border-radius: 8px;
@@ -957,4 +971,159 @@ body::before {
   .dino-section { padding: 10px 20px 60px; }
   .dino-section h2 { font-size: 22px; }
   .dino-wrap { height: 220px; }
+}
+
+/* ============ 命令大全页 ============ */
+
+/* 左上角返回首页（液态玻璃） */
+.back-home-btn {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  padding: 10px 20px;
+  font-size: 14px;
+  color: #c9d1d9;
+  text-decoration: none;
+  border-radius: 50px;
+  z-index: 200;
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(16px) saturate(180%);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.4),
+    inset 0 1px 1px rgba(255, 255, 255, 0.25);
+  transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
+}
+.back-home-btn:hover {
+  transform: scale(1.05);
+  background: rgba(255, 255, 255, 0.14);
+  box-shadow:
+    0 12px 40px rgba(88, 166, 255, 0.35),
+    inset 0 1px 1px rgba(255, 255, 255, 0.35);
+}
+
+/* 右上角搜索框 */
+.search-wrap {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 200;
+}
+.search-input {
+  width: 280px;
+  padding: 10px 20px;
+  font-size: 14px;
+  color: #c9d1d9;
+  border-radius: 50px;
+  outline: none;
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(16px) saturate(180%);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.4),
+    inset 0 1px 1px rgba(255, 255, 255, 0.25);
+  transition: all 0.25s ease;
+}
+.search-input::placeholder { color: #8b949e; }
+.search-input:focus {
+  border-color: #58a6ff;
+  background: rgba(88, 166, 255, 0.1);
+  box-shadow:
+    0 12px 40px rgba(88, 166, 255, 0.35),
+    inset 0 1px 1px rgba(255, 255, 255, 0.35);
+}
+
+/* 命令大全页 */
+.command-section {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 120px 40px 80px;
+}
+.command-section h1 {
+  font-size: 36px;
+  color: #58a6ff;
+  text-align: center;
+  margin-bottom: 12px;
+}
+.command-intro {
+  text-align: center;
+  color: #8b949e;
+  margin-bottom: 56px;
+}
+
+/* 命令列表 */
+.command-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.command-loading {
+  text-align: center;
+  color: #8b949e;
+}
+.command-item {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 14px 20px;
+  background: #161b22;
+  border: 1px solid #30363d;
+  border-radius: 8px;
+  transition: border-color 0.2s, transform 0.2s;
+}
+.command-item:hover {
+  border-color: #58a6ff;
+  transform: translateX(4px);
+}
+.command-item .cmd-name {
+  flex-shrink: 0;
+  font-size: 14px;
+  color: #c9d1d9;
+  font-weight: bold;
+  min-width: 100px;
+}
+.command-item code {
+  flex-shrink: 0;
+  padding: 4px 10px;
+  background: #21262d;
+  color: #7ee787;
+  border-radius: 4px;
+  font-family: "Consolas", "Cascadia Mono", monospace;
+  font-size: 14px;
+  white-space: nowrap;
+}
+.command-item .cmd-desc {
+  color: #8b949e;
+  font-size: 14px;
+}
+.command-item.hidden { display: none; }
+
+/* 手机端 */
+@media (max-width: 768px) {
+  .back-home-btn {
+    top: 14px; left: 14px;
+    padding: 8px 14px;
+    font-size: 13px;
+  }
+  .search-wrap {
+    top: 14px; right: 14px;
+  }
+  .search-input {
+    width: 160px;
+    padding: 8px 14px;
+    font-size: 13px;
+  }
+  .command-section {
+    padding: 100px 20px 60px;
+  }
+  .command-section h1 { font-size: 28px; }
+  .command-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+  .command-item .cmd-name { min-width: 0; }
+  .command-item code { font-size: 13px; }
 }

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>命令大全 | 栖云服务器</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body data-current-page="command">
+  <!-- 加载动画 -->
+  <div class="loader" id="loader">
+    <div class="loader-logo">   栖云正在奋力加载中……</div>
+    <div class="loader-bar"><div class="loader-bar-fill"></div></div>
+  </div>
+
+  <!-- 顶部阅读进度条 -->
+  <div class="read-progress" id="readProgress"></div>
+
+  <!-- 鼠标光效 -->
+  <div class="cursor-glow" id="cursorGlow"></div>
+
+  <!-- 顶部提示框 -->
+  <div class="toast" id="toast">
+    <div class="toast-text">又被我整到了吧~你好坏！</div>
+    <div class="toast-bar"><div class="toast-bar-fill"></div></div>
+  </div>
+
+  <!-- 左上角返回首页 -->
+  <a href="index.html" class="back-home-btn">← 返回首页</a>
+
+  <!-- 右上角搜索框 -->
+  <div class="search-wrap">
+    <input type="text" id="searchInput" class="search-input" placeholder="搜索命令，比如：家、领地、传送……" />
+  </div>
+
+  <!-- 命令大全 -->
+  <section class="command-section">
+    <h1>服务器命令</h1>
+    <p class="command-intro">在右上角搜索关键词，或者手动浏览</p>
+    <div class="command-list" id="commandList">
+      <p class="command-loading">加载中……</p>
+    </div>
+  </section>
+
+  <footer>
+    <p>栖云服务器 | 官方 QQ 群：675736013</p>
+    <p>Powered by QiYun | Copyright © 2026</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
