@@ -35,26 +35,41 @@
       <li><a href="blog.html" data-page="blog">博客</a></li>
       <li><a href="admin.html" data-page="admin">管理团队</a></li>
 	  <li><a href="tools.html" data-page="tools">工具</a></li>
-	  <li><a href="download/栖云客户端.mrpack" download class="nav-download" id="downloadPack">下载整合包</a></li>
+	  <li><a href="download.html" data-page="download" class="nav-download">下载整合包</a></li>
     </ul>
   </nav>
 
-  <!-- 首屏 -->
+    <!-- 首屏 -->
   <section id="home" class="hero">
-    <h1>栖云服务器</h1>
-    <p class="slogan" id="slogan">红石生电 · 休闲生存 · 原版客户端即可加入</p>
-    <div class="hero-info">
-      <span>已持续运营 <strong id="days">0</strong> 天</span>
-      <span class="group-hover">
-        官方 QQ 群：<strong>675736013</strong>
-        <img src="qrcode.png" alt="群二维码" class="qrcode-popup">
-      </span>
+    <!-- 轮播背景 -->
+    <div class="hero-bg">
+      <div class="hero-bg-img" style="background-image: url('images/bg1.png')"></div>
+      <div class="hero-bg-img" style="background-image: url('images/bg2.png')"></div>
+      <div class="hero-bg-img" style="background-image: url('images/bg3.png')"></div>
+      <div class="hero-bg-img" style="background-image: url('images/bg4.png')"></div>
     </div>
-    <div class="hero-btns">
-      <a href="#servers" class="btn">服务器地址</a>
-      <a href="https://qm.qq.com/q/H8rvoMm4i4" target="_blank" class="btn btn-blue">加入官方群</a>
-      <a href="blog.html" class="btn btn-purple">查看博客</a>
+    <div class="hero-mask"></div>
+
+    <!-- 首屏内容 -->
+    <div class="hero-content">
+      <h1>栖云服务器</h1>
+      <p class="slogan" id="slogan">红石生电 · 休闲生存 · 原版客户端即可加入</p>
+      <div class="hero-info">
+        <span>已持续运营 <strong id="days">0</strong> 天</span>
+        <span class="group-hover">
+          官方 QQ 群：<strong>675736013</strong>
+          <img src="qrcode.png" alt="群二维码" class="qrcode-popup">
+        </span>
+      </div>
+      <div class="hero-btns">
+        <a href="#servers" class="btn">服务器地址</a>
+        <a href="https://qm.qq.com/q/H8rvoMm4i4" target="_blank" class="btn btn-blue">加入官方群</a>
+        <a href="blog.html" class="btn btn-purple">查看博客</a>
+      </div>
     </div>
+
+    <!-- 向下箭头 -->
+    <div class="scroll-down" id="scrollDown"></div>
   </section>
 
   <!-- 数据卡片 -->

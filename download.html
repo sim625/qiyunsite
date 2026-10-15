@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>整合包使用教程 | 栖云服务器</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body data-current-page="download">
+  <!-- 加载动画 -->
+  <div class="loader" id="loader">
+    <div class="loader-logo">   栖云正在奋力加载中……</div>
+    <div class="loader-bar"><div class="loader-bar-fill"></div></div>
+  </div>
+
+  <!-- 鼠标光效 -->
+  <div class="cursor-glow" id="cursorGlow"></div>
+
+  <!-- 顶部提示框 -->
+  <div class="toast" id="toast">
+    <div class="toast-text">又被我整到了吧~你好坏！</div>
+    <div class="toast-bar"><div class="toast-bar-fill"></div></div>
+  </div>
+
+  <!-- 顶部进度条 -->
+  <div class="read-progress" id="readProgress"></div>
+
+  <!-- 导航栏 -->
+  <nav class="navbar">
+    <div class="nav-logo">栖云服务器</div>
+    <button class="nav-toggle" id="navToggle">☰</button>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="index.html" data-page="home">首页</a></li>
+      <li><a href="index.html#servers" data-page="servers">分区</a></li>
+      <li><a href="index.html#rules" data-page="rules">规则</a></li>
+      <li><a href="index.html#thanks" data-page="thanks">鸣谢</a></li>
+      <li><a href="index.html#faq" data-page="faq">常见问题</a></li>
+      <li><a href="blog.html" data-page="blog">博客</a></li>
+      <li><a href="admin.html" data-page="admin">管理团队</a></li>
+      <li><a href="tools.html" data-page="tools">工具</a></li>
+      <li><a href="download/栖云客户端.mrpack" download class="nav-download" id="downloadPack">下载整合包</a></li>
+    </ul>
+  </nav>
+
+  <!-- 教程内容 -->
+  <section class="guide-section">
+    <h1>整合包使用教程</h1>
+    <p class="guide-intro">栖云服务器官方整合包食用教程，体验感最好！</p>
+
+    <!-- 步骤 1 -->
+    <div class="guide-step" id="step1">
+      <div class="guide-step-num">1</div>
+      <div class="guide-step-content">
+        <h2>下载整合包</h2>
+        <p>点击导航栏右上角的 <strong>「下载整合包」</strong>，浏览器会开始下载 <strong>栖云客户端.mrpack</strong> 。</p>
+      </div>
+    </div>
+
+    <!-- 步骤 2 -->
+    <div class="guide-step" id="step2">
+      <div class="guide-step-num">2</div>
+      <div class="guide-step-content">
+        <h2>安装启动器</h2>
+        <p>整合包用的是 <strong>Modrinth 格式（.mrpack）</strong>，推荐用以下启动器打开：</p>
+        <ul>
+		  <li>
+			PCL2（推荐，Windows）
+			<a href="download/Plain Craft Launcher 2.exe" download class="launcher-link">下载这个启动器</a>
+		  </li>
+		  <li>
+			HMCL（跨平台）
+			<a href="download/HMCL-3.15.2.exe" download class="launcher-link">下载这个启动器</a>
+		  </li>
+		  <li>
+			Modrinth App（官方，跨平台）
+			<a href="download/Modrinth.App_0.10.3-zhcn_x64-setup.exe" download class="launcher-link">下载这个启动器</a>
+		  </li>
+		</ul>
+      </div>
+    </div>
+
+    <!-- 步骤 3 -->
+    <div class="guide-step" id="step3">
+      <div class="guide-step-num">3</div>
+      <div class="guide-step-content">
+        <h2>导入整合包</h2>
+        <p>打开启动器 → 找到「导入整合包」或「安装整合包」按钮 → 选择刚才下载的 <code>栖云客户端.mrpack</code> → 等它自动下载依赖。</p>
+        <p>下载时间取决于网速，一般 3~5 分钟。</p>
+      </div>
+    </div>
+
+    <!-- 步骤 4 -->
+    <div class="guide-step" id="step4">
+      <div class="guide-step-num">4</div>
+      <div class="guide-step-content">
+        <h2>启动游戏，进服</h2>
+        <p>启动游戏后，点击“去栖云服务器玩喽”按钮即可进入服务器。</p>
+        <p>进服后如果遇到问题，去 <a href="index.html#faq">常见问题</a> 看看，或者加官方群问。</p>
+      </div>
+    </div>
+
+    <!-- 快速跳转 -->
+    <div class="quick-jump">
+      <span>快速跳转：</span>
+      <button data-jump="step1">1</button>
+      <button data-jump="step2">2</button>
+      <button data-jump="step3">3</button>
+      <button data-jump="step4">4</button>
+    </div>
+  </section>
+
+  <footer>
+    <p>栖云服务器 | 官方 QQ 群：675736013</p>
+    <p>Powered by QiYun | Copyright © 2026</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

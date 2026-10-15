@@ -6,11 +6,13 @@
   <title>工具 | 栖云服务器</title>
   <link rel="stylesheet" href="style.css">
 </head>
-<div class="surrender-btn" id="surrenderBtn">🏳️</div>
 <body data-current-page="tools">
+  <!-- 小白旗 -->
+  <div class="surrender-btn" id="surrenderBtn">🏳️</div>
+
   <!-- 加载动画 -->
   <div class="loader" id="loader">
-    <div class="loader-logo">   栖云正在奋力加载中……</div>
+    <div class="loader-logo">栖云正在奋力加载中……</div>
     <div class="loader-bar"><div class="loader-bar-fill"></div></div>
   </div>
 
@@ -36,7 +38,7 @@
       <li><a href="blog.html" data-page="blog">博客</a></li>
       <li><a href="admin.html" data-page="admin">管理团队</a></li>
       <li><a href="tools.html" data-page="tools">工具</a></li>
-	  <li><a href="download/栖云客户端.mrpack" download class="nav-download" id="downloadPack">下载整合包</a></li>
+      <li><a href="download.html" data-page="download" class="nav-download">下载整合包</a></li>
     </ul>
   </nav>
 
@@ -46,15 +48,24 @@
     <p class="tools-intro">一些奇奇怪怪的小工具，随便玩玩。</p>
 
     <div class="tools-grid">
-		<button class="pcl-btn" id="toolMemory">内存优化</button>
-		<button class="pcl-btn" id="toolClean">清理游戏垃圾</button>
-		<button class="pcl-btn" id="toolCrash">强制关闭游戏</button>
-		<button class="pcl-btn" id="toolBoost">一键超频</button>
-		<button class="pcl-btn" id="toolDelete">清理系统盘</button>
-		<button class="pcl-btn" id="echoCave">回声洞</button>
-		<button class="pcl-btn" id="chaseBtn">点我</button>
-		<button class="pcl-btn danger no-grow" id="neverClickBtn" data-tip="真假美猴王">千万别点</button>
-		<button class="pcl-btn danger no-grow" id="neverClickRealBtn" data-tip="建议不要点，可能会出现一些……bug">千万别点（真）</button>
+      <button class="pcl-btn" id="toolMemory">内存优化</button>
+      <button class="pcl-btn" id="toolClean">清理游戏垃圾</button>
+      <button class="pcl-btn" id="toolCrash">强制关闭游戏</button>
+      <button class="pcl-btn" id="toolBoost">一键超频</button>
+      <button class="pcl-btn" id="toolDelete">清理系统盘</button>
+      <button class="pcl-btn" id="echoCave">回声洞</button>
+      <button class="pcl-btn" id="chaseBtn">点我</button>
+      <button class="pcl-btn danger no-grow" id="neverClickBtn" data-tip="真假美猴王">千万别点</button>
+      <button class="pcl-btn danger no-grow" id="neverClickRealBtn" data-tip="建议不要点，可能会出现一些……bug">千万别点（真）</button>
+    </div>
+  </section>
+
+  <!-- 恐龙小游戏 -->
+  <section class="dino-section">
+    <h2>等服的时候，来把恐龙</h2>
+    <p class="dino-intro">经典 Chrome 小恐龙，按空格跳跃</p>
+    <div class="dino-wrap">
+      <iframe src="https://chromedino.com/embed/" frameborder="0" scrolling="no" loading="lazy" title="恐龙小游戏"></iframe>
     </div>
   </section>
 

@@ -752,3 +752,69 @@ if (downloadPack) {
     showToast("下载中，请稍等……");
   });
 }
+
+// ============ 首屏背景轮播 ============
+const heroBgImgs = document.querySelectorAll(".hero-bg-img");
+if (heroBgImgs.length > 0) {
+  let bgIndex = 0;
+  heroBgImgs[0].classList.add("active");
+
+  setInterval(() => {
+    heroBgImgs[bgIndex].classList.remove("active");
+    bgIndex = (bgIndex + 1) % heroBgImgs.length;
+    heroBgImgs[bgIndex].classList.add("active");
+  }, 5000);
+}
+
+// ============ 向下滚动箭头 ============
+const scrollDown = document.getElementById("scrollDown");
+if (scrollDown) {
+  scrollDown.addEventListener("click", () => {
+    const stats = document.querySelector(".stats");
+    if (stats) {
+      stats.scrollIntoView({ behavior: "smooth" });
+    }
+  });
+}
+
+// ============ 阅读进度条 ============
+const readProgress = document.getElementById("readProgress");
+if (readProgress) {
+  window.addEventListener("scroll", () => {
+    const scrollTop = window.scrollY;
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const percent = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+    readProgress.style.width = percent + "%";
+  });
+}
+
+// ============ 快速跳转 + 高亮当前步骤 ============
+const jumpButtons = document.querySelectorAll(".quick-jump button");
+if (jumpButtons.length > 0) {
+  jumpButtons.forEach(btn => {
+    btn.addEventListener("click", () => {
+      const targetId = btn.getAttribute("data-jump");
+      const target = document.getElementById(targetId);
+      if (target) {
+        const top = target.offsetTop - 100;
+        window.scrollTo({ top: top, behavior: "smooth" });
+      }
+    });
+  });
+
+  // 滚动时高亮当前步骤
+  const steps = document.querySelectorAll(".guide-step");
+  window.addEventListener("scroll", () => {
+    let currentStep = "";
+    steps.forEach(step => {
+      const top = step.offsetTop - 200;
+      if (window.scrollY >= top) currentStep = step.getAttribute("id");
+    });
+    jumpButtons.forEach(btn => {
+      btn.classList.remove("active");
+      if (btn.getAttribute("data-jump") === currentStep) {
+        btn.classList.add("active");
+      }
+    });
+  });
+}
