@@ -205,17 +205,6 @@ document.querySelectorAll(".player-name").forEach(el => {
   });
 });
 
-// ============ 加载动画 ============
-const loader = document.getElementById("loader");
-if (loader) {
-  window.addEventListener("load", () => {
-    setTimeout(() => {
-      loader.classList.add("hide");
-      setTimeout(() => loader.remove(), 500);
-    }, 800);
-  });
-}
-
 // ============ 鼠标光效 ============
 const cursorGlow = document.getElementById("cursorGlow");
 if (cursorGlow) {
